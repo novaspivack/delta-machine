@@ -1,0 +1,130 @@
+name: "Phase II Curvature-Invariant Discovery"
+description: "Discover an invariant linking local dissonance, curvature proxy, and entropy density within metric-closure dynamics."
+scenario_type: discovery
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 16000
+
+halting_criteria:
+  dissonance_plateau_steps: 300
+  dissonance_plateau_tolerance: 0.0002
+  max_steps: 16000
+  success_condition: discovery_verified
+
+success_metrics:
+  residual_rms:
+    max: 5.0e-3
+  invariant_residual_variance:
+    max: 2.0e-3
+  discovery_verified:
+    min: 1.0
+
+initial_condition_refs:
+  - name: random_low_energy
+    type: random
+    parameters:
+      psi_amplitude: 0.2
+      chi_amplitude: 0.05
+  - name: gaussian_sheet
+    type: gaussian
+    parameters:
+      amplitude: 0.8
+      sigma: 8.0
+  - name: vortex_triple
+    type: vortex
+    parameters:
+      amplitude: 1.2
+      vorticity: 3
+  - name: soliton_dual_charge
+    type: soliton
+    parameters:
+      amplitude: 2.0
+      width: 5.0
+      charge: 2
+
+constraints:
+  - name: metric_closure_psi_real
+    expression: psi_real - 0.3 * (psi_real**3 - 3*psi_real*psi_imag**2) - 0.2 * chi * psi_real
+    variables: [psi_real, psi_imag, chi]
+    target: psi_real
+    dependencies: []
+    weight: 3.0
+
+  - name: metric_closure_psi_imag
+    expression: psi_imag - 0.3 * (3*psi_real**2*psi_imag - psi_imag**3) - 0.2 * chi * psi_imag
+    variables: [psi_real, psi_imag, chi]
+    target: psi_imag
+    dependencies: [metric_closure_psi_real]
+    weight: 3.0
+
+  - name: chi_metric_coupling
+    expression: chi - 0.25 * (psi_real**2 + psi_imag**2) - 0.15 * chi**3 + 0.1 * chi_dot
+    variables: [psi_real, psi_imag, chi, chi_dot]
+    target: chi
+    dependencies: [metric_closure_psi_real, metric_closure_psi_imag]
+    weight: 2.5
+
+  - name: chi_dot_closure
+    expression: chi_dot - 0.2 * chi * (1 - chi**2) - 0.1 * chi_dot * (psi_real**2 + psi_imag**2) + 0.05 * chi_dot**3
+    variables: [psi_real, psi_imag, chi, chi_dot]
+    target: chi_dot
+    dependencies: [chi_metric_coupling]
+    weight: 1.5
+
+metadata:
+  description: "Live metric-closure run instrumented with curvature and entropy probes to search for a D–ℛ–S invariant."
+  max_workers: 9
+  constraint_backend:
+    type: taichi
+    arch: cpu
+    cpu_max_num_threads: auto
+    fusion_policy: auto
+    parallelize: auto
+    inner_iterations: 2
+    relaxation_rate: 0.01
+    tile_shape: [8, 8]
+    use_vectorized: true
+  curvature_probe:
+    mode: metric_residual
+    laplacian_scale: 0.7
+    smoothing_radius: 2
+  entropy_probe:
+    epsilon: 1.0e-9
+    smoothing_radius: 2
+  include_dissonance_local: true
+  discovery_ignore_coefficients: true
+  discovery_burn_in_steps: 4000
+  discovery_sample_interval: 50
+  discovery_window_samples: 200
+  discovery_features:
+    - name: dissonance_local
+      expression: dissonance_local
+    - name: entropy_density
+      expression: entropy_density
+    - name: dissonance_sq
+      expression: dissonance_local**2
+    - name: entropy_sq
+      expression: entropy_density**2
+    - name: cross_term
+      expression: dissonance_local * entropy_density
+    - name: log_dissonance
+      expression: log(dissonance_local + 1.0e-6)
+    - name: log_entropy
+      expression: log(abs(entropy_density) + 1.0e-6)
+    - name: curvature_over_dissonance
+      expression: curvature_proxy / (dissonance_local + 1.0e-6)
+    - name: curvature_over_entropy
+      expression: curvature_proxy / (abs(entropy_density) + 1.0e-6)
+    - name: normalized_curvature
+      expression: curvature_proxy / (sqrt(dissonance_local**2 + entropy_density**2) + 1.0e-6)
+    - name: bias
+      expression: 1.0
+  discovery_target_expression: curvature_proxy
+  discovery_include_bias: false
+  residual_tolerance: 5.0e-3
+  verification_window: 80
+  expected_behavior: "DSAC should fit curvature_proxy as a nonlinear combination of dissonance and entropy proxies, revealing an emergent invariant once the ensemble stabilizes."
+  discovery_prior:
+    enabled: false
+    expression: (dissonance_local + entropy_density)
+    weight: 0.1

@@ -1,0 +1,11 @@
+{
+  "count": 48,
+  "boundary_energy_mean": 0.13855516366562678,
+  "bulk_energy_mean": 0.893904506803428,
+  "compression_ratio_mean": 0.1552612810124213,
+  "mutual_information_mean": 1.8861991627785428,
+  "psc_efficiency_mean": 0.17361351214237533,
+  "edge_alignment_mean": 0.19906050643803477,
+  "dimensional_lift_signal_mean": 0.8518084587596167,
+  "spectral_overlap_mean": 0.42832140207238883
+}

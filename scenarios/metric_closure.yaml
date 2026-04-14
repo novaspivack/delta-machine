@@ -1,0 +1,93 @@
+# Scenario specification for DSAC metric closure synthesis.
+# Refer to notes/1.5_dsac_scenario_roadmap.md for objectives and tolerances.
+name: Metric Closure Pattern Synthesis
+scenario_type: pattern_synthesis
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 20000
+
+halting_criteria:
+  dissonance_threshold: 0.002
+  dissonance_plateau_steps: 300
+  dissonance_plateau_tolerance: 0.0002
+  max_steps: 20000
+  success_condition: closure_verified
+
+success_metrics:
+  closure_error:
+    max: 1.0
+  divergence_rms:
+    max: 0.35
+  chi_alignment_rms:
+    max: 0.35
+  pattern_complexity:
+    min: 0.15
+  closure_verified:
+    min: 1.0
+
+initial_condition_refs:
+  - name: random_low_energy
+    type: random
+    parameters:
+      psi_amplitude: 0.2
+      chi_amplitude: 0.05
+  - name: gaussian_sheet
+    type: gaussian
+    parameters:
+      amplitude: 0.8
+      sigma: 8.0
+  - name: vortex_triple
+    type: vortex
+    parameters:
+      amplitude: 1.2
+      vorticity: 3
+  - name: soliton_dual_charge
+    type: soliton
+    parameters:
+      amplitude: 2.0
+      width: 5.0
+      charge: 2
+
+constraints:
+  - name: metric_closure_psi_real
+    expression: psi_real - 0.3 * (psi_real**3 - 3*psi_real*psi_imag**2) - 0.2 * chi * psi_real
+    variables: [psi_real, psi_imag, chi]
+    target: psi_real
+    dependencies: []
+    weight: 3.0
+
+  - name: metric_closure_psi_imag
+    expression: psi_imag - 0.3 * (3*psi_real**2*psi_imag - psi_imag**3) - 0.2 * chi * psi_imag
+    variables: [psi_real, psi_imag, chi]
+    target: psi_imag
+    dependencies: [metric_closure_psi_real]
+    weight: 3.0
+
+  - name: chi_metric_coupling
+    expression: chi - 0.25 * (psi_real**2 + psi_imag**2) - 0.15 * chi**3 + 0.1 * chi_dot
+    variables: [psi_real, psi_imag, chi, chi_dot]
+    target: chi
+    dependencies: [metric_closure_psi_real, metric_closure_psi_imag]
+    weight: 2.5
+
+  - name: chi_dot_closure
+    expression: chi_dot - 0.2 * chi * (1 - chi**2) - 0.1 * chi_dot * (psi_real**2 + psi_imag**2) + 0.05 * chi_dot**3
+    variables: [psi_real, psi_imag, chi, chi_dot]
+    target: chi_dot
+    dependencies: [chi_metric_coupling]
+    weight: 1.5
+
+metadata:
+  description: "Metric closure scenario where constraints enforce geometric closure properties, synthesizing novel patterns through self-consistent metric relationships. Demonstrates Δ-Computing's ability to generate complex structures through reflexive constraint satisfaction."
+  closure_model:
+    chi_scale: 0.25
+    chi_offset: 0.0
+    divergence_target: 0.0
+    curl_alignment: chi
+    laplacian_target: 0.0
+  closure_tolerance: 1.0
+  divergence_tolerance: 0.35
+  chi_alignment_tolerance: 0.35
+  curl_alignment_tolerance: 0.35
+  verification_window: 80
+  expected_behavior: "System should synthesize complex, self-consistent patterns that satisfy metric closure constraints, with divergence-free flow and χ aligned to ψ field magnitudes."

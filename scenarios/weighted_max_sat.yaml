@@ -1,0 +1,107 @@
+# Scenario specification for DSAC Max-SAT demonstration.
+# Refer to notes/1.5_dsac_scenario_roadmap.md for roadmap context and metrics.
+name: Weighted Max-SAT Relaxation
+scenario_type: sat_solver
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 4000
+
+halting_criteria:
+  residual_threshold: 0.02
+  dissonance_threshold: 0.02
+  dissonance_plateau_steps: 200
+  dissonance_plateau_tolerance: 0.0005
+  max_steps: 4000
+  success_condition: solution_verified
+
+success_metrics:
+  max_clause_deficit:
+    max: 1.0
+  weighted_score:
+    min: 14.5
+  solution_verified:
+    min: 1.0
+
+initial_condition_refs:
+  - name: random_dense
+    type: random
+    parameters:
+      psi_amplitude: 0.45
+      chi_amplitude: 0.25
+  - name: gaussian_focus
+    type: gaussian
+    parameters:
+      amplitude: 0.9
+      sigma: 8.0
+  - name: vortex_seed
+    type: vortex
+    parameters:
+      amplitude: 0.9
+      vorticity: 3
+
+constraints:
+  - name: psi_real
+    expression: -(2*psi_real*(21*psi_real**2 - 221)*cosh(6*psi_real)**2 + 420*(tanh(6*chi) + 1)**2*(tanh(6*psi_real) + 1) + 315*(tanh(6*psi_imag) + 1)**2*(tanh(6*psi_real) - 1) + 2520*tanh(6*psi_real) + 1680)/(400*cosh(6*psi_real)**2)
+    variables: [psi_real, psi_imag, chi]
+    target: psi_real
+    dependencies: []
+    weight: 1.0
+
+  - name: psi_imag
+    expression: -(4*psi_imag*(21*psi_imag**2 - 221)*cosh(6*psi_imag)**2 + 525*(tanh(6*chi) - 1)**2*(tanh(6*psi_imag) - 1) + 630*(tanh(6*psi_imag) + 1)*(tanh(6*psi_real) - 1)**2)/(800*cosh(6*psi_imag)**2)
+    variables: [psi_real, psi_imag, chi]
+    target: psi_imag
+    dependencies: [psi_real]
+    weight: 1.0
+
+  - name: chi
+    expression: -(4*chi*(21*chi**2 - 221)*cosh(6*chi)**2 + 525*(tanh(6*chi) - 1)*(tanh(6*psi_imag) - 1)**2 + 840*(tanh(6*chi) + 1)*(tanh(6*psi_real) + 1)**2)/(800*cosh(6*chi)**2)
+    variables: [psi_real, psi_imag, chi]
+    target: chi
+    dependencies: [psi_real, psi_imag]
+    weight: 1.0
+
+  - name: chi_dot
+    expression: chi_dot - 0.3 * chi_dot
+    variables: [chi_dot]
+    target: chi_dot
+    dependencies: [psi_real, psi_imag, chi]
+    weight: 0.5
+
+metadata:
+  description: "Weighted Max-SAT instance demonstrating DSAC differential optimisation under conflicting clauses."
+  cnf_clauses:
+    - weight: 3.0
+      literals:
+        - [x1, true]
+        - [x2, false]
+    - weight: 2.5
+      literals:
+        - [x2, true]
+        - [x3, true]
+    - weight: 4.0
+      literals:
+        - [x1, false]
+        - [x3, false]
+    - weight: 1.0
+      literals:
+        - [x1, true]
+    - weight: 5.0
+      literals:
+        - [x1, false]
+  beta: 6.0
+  gamma: 0.35
+  regularization: 0.3
+  clause_tolerance: 0.02
+  weight_tolerance: 0.01
+  target_weight: 14.5
+  require_clause_tolerance: false
+  variable_map:
+    x1: psi_real
+    x2: psi_imag
+    x3: chi
+  target_assignment:
+    x1: false
+    x2: false
+    x3: true
+  expected_behavior: "DSAC should emphasise high-weight clauses, converging on the assignment that maximises satisfied weight (14.5 of 15.5)."

@@ -1,0 +1,74 @@
+name: "Phase II PR-0 Transport Discovery"
+description: "Discover a reflexive transport law linking PR-0 density, gradients, and damping flux to the observed density evolution."
+scenario_type: discovery
+lattice: [64, 64]
+timestep: 0.01
+max_steps: 1
+
+halting_criteria:
+  max_steps: 1
+  success_condition: discovery_verified
+
+initial_condition_refs:
+  - name: pr0_transport_dataset_baseline
+    type: pr0_transport_dataset
+    parameters:
+      dataset_dir: data/pr0_transport
+      regime: baseline
+
+constraints:
+  - name: identity_guard
+    expression: psi_real
+    variables: [psi_real]
+    target: psi_real
+    dependencies: []
+    weight: 0.0
+
+metadata:
+  description: "Frozen PR-0 coarse-grained dataset for reflexive transport law discovery."
+  notes_ref: "notes/1.35_phase2_pr0_transport_plan.md"
+  max_workers: 4
+  freeze_fields: true
+  dataset_dir: "data/pr0_transport"
+  default_regime: "baseline"
+  transport_window:
+    sample_every: 10
+    smoothing_window: 5
+  constraint_backend:
+    type: taichi
+    arch: cpu
+    fusion_policy: auto
+    parallelize: auto
+    inner_iterations: 2
+    tile_shape: [8, 8]
+    block_dim: 64
+    use_vectorized: true
+    relaxation_rate: 0.01
+  discovery_burn_in_steps: 0
+  discovery_sample_interval: 1
+  discovery_fit_interval: 1
+  discovery_fit_min_samples: 1
+  discovery_include_bias: true
+  discovery_ridge_lambda: 1.0e-9
+  discovery_ignore_coefficients: false
+  coefficient_tolerance: 5.0
+  max_coefficient_tolerance: 10.0
+  discovery_features:
+    - name: rho_centered
+      expression: psi_real - np.mean(psi_real)
+    - name: lap_rho
+      expression: (np.roll(psi_real, 1, axis=0) + np.roll(psi_real, -1, axis=0) + np.roll(psi_real, 1, axis=1) + np.roll(psi_real, -1, axis=1) - 4 * psi_real)
+    - name: gamma_centered
+      expression: chi_dot - np.mean(chi_dot)
+    - name: lap_gamma
+      expression: (np.roll(chi_dot, 1, axis=0) + np.roll(chi_dot, -1, axis=0) + np.roll(chi_dot, 1, axis=1) + np.roll(chi_dot, -1, axis=1) - 4 * chi_dot)
+    - name: diff_grad_norm
+      expression: sqrt(psi_imag**2 + chi**2) / (np.sqrt(np.mean(psi_imag**2 + chi**2)) + 1.0e-6)
+    - name: gamma_normalized
+      expression: chi_dot / (np.sqrt(np.mean(chi_dot**2)) + 1.0e-6)
+    - name: bias
+      expression: 1.0
+  discovery_target_expression: dissonance - np.mean(dissonance)
+  residual_tolerance: 2.0
+  verification_window: 1
+  expected_behavior: "DSAC should regress density evolution against normalized gradients and damping terms extracted from PR-0 ensembles."

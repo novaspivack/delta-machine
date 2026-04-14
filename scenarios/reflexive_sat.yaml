@@ -1,0 +1,98 @@
+name: Reflexive SAT Equilibrium
+scenario_type: sat_solver
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 4000
+
+halting_criteria:
+  residual_threshold: 0.02
+  dissonance_threshold: 0.02
+  dissonance_plateau_steps: 200
+  dissonance_plateau_tolerance: 0.0005
+  max_steps: 4000
+  success_condition: solution_verified
+
+success_metrics:
+  max_clause_deficit:
+    max: 0.01
+  assignment_satisfied:
+    min: 1.0
+  solution_verified:
+    min: 1.0
+
+initial_condition_refs:
+  - name: random_dense
+    type: random
+    parameters:
+      psi_amplitude: 0.4
+      chi_amplitude: 0.2
+  - name: gaussian_pulse
+    type: gaussian
+    parameters:
+      amplitude: 0.8
+  - name: vortex_pair
+    type: vortex
+    parameters:
+      amplitude: 0.8
+      vorticity: 2
+
+constraints:
+  - name: psi_real
+    expression: psi_real + 0.35*((0.25*(1 - tanh(6.0*psi_real))*(1 + tanh(6.0*psi_imag))) - (0.25*(1 + tanh(6.0*psi_real))*(1 + tanh(6.0*chi))) - 0.3*(psi_real**3 - psi_real))
+    variables: [psi_real, psi_imag, chi]
+    target: psi_real
+    dependencies: []
+    weight: 1.0
+
+  - name: psi_imag
+    expression: psi_imag + 0.35*((-0.25*(1 - tanh(6.0*psi_real))*(1 + tanh(6.0*psi_imag))) + (0.25*(1 - tanh(6.0*psi_imag))*(1 - tanh(6.0*chi))) - 0.3*(psi_imag**3 - psi_imag))
+    variables: [psi_real, psi_imag, chi]
+    target: psi_imag
+    dependencies: [psi_real]
+    weight: 1.0
+
+  - name: chi
+    expression: chi + 0.35*((0.25*(1 - tanh(6.0*psi_imag))*(1 - tanh(6.0*chi))) - (0.25*(1 + tanh(6.0*psi_real))*(1 + tanh(6.0*chi))) - 0.3*(chi**3 - chi))
+    variables: [psi_real, psi_imag, chi]
+    target: chi
+    dependencies: [psi_real, psi_imag]
+    weight: 1.0
+
+  - name: chi_dot
+    expression: chi_dot - 0.3 * chi_dot
+    variables: [chi_dot]
+    target: chi_dot
+    dependencies: [psi_real, psi_imag, chi]
+    weight: 0.5
+
+metadata:
+  description: "Reflexive SAT solver where literals self-adjust to satisfy CNF constraints via differential self-adjudication."
+  cnf_clauses:
+    - weight: 1.0
+      literals:
+        - [x1, true]
+        - [x2, false]
+    - weight: 1.0
+      literals:
+        - [x2, true]
+        - [x3, true]
+    - weight: 1.0
+      literals:
+        - [x1, false]
+        - [x3, false]
+  beta: 6.0
+  gamma: 0.35
+  regularization: 0.3
+  clause_tolerance: 0.01
+  weight_tolerance: 1e-06
+  target_weight: 3.0
+  variable_map:
+    x1: psi_real
+    x2: psi_imag
+    x3: chi
+  target_assignment:
+    x1: false
+    x2: false
+    x3: true
+  expected_behavior: "System should drive all clause deficits below tolerance, yielding the target assignment without classical branching."
+

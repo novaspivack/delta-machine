@@ -1,0 +1,34 @@
+name: Basic DSAC Equilibration
+lattice: [64, 64]
+timestep: 0.01
+max_steps: 1000
+constraints:
+  - name: psi_real
+    expression: psi_real - 0.001 * chi
+    variables: ["psi_real", "chi"]
+    target: psi_real
+    weight: 1.0
+  - name: psi_imag
+    expression: psi_imag
+    variables: ["psi_imag"]
+    target: psi_imag
+    weight: 0.5
+  - name: chi
+    expression: 0.95 * chi + 0.05 * psi_real
+    variables: ["chi", "psi_real"]
+    dependencies: ["psi_real"]
+    target: chi
+    weight: 1.5
+  - name: chi_dot
+    expression: chi_dot + 0.1 * (psi_real - chi)
+    variables: ["chi_dot", "psi_real", "chi"]
+    dependencies: ["chi"]
+    target: chi_dot
+    weight: 0.8
+metadata:
+  description: >
+    Minimal test scenario enforcing gentle coupling between psi and chi fields.
+  source_functionals:
+    - /Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/si_optimizer_data/MATHEMATICAL_FOUNDATIONS_REFLEXIVE_REALITY/Mathematical_Foundations_of_Reflexive_Reality.tex
+    - /Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/si_optimizer_data/PR_0_paper/PR_0_Substrate_Paper.tex
+

@@ -1,0 +1,133 @@
+name: "Phase I Polynomial Law Discovery"
+scenario_type: discovery
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 12000
+
+halting_criteria:
+  dissonance_plateau_steps: 200
+  dissonance_plateau_tolerance: 0.0004
+  max_steps: 12000
+  success_condition: discovery_verified
+
+success_metrics:
+  residual_rms:
+    max: 0.015
+  max_coefficient_error:
+    max: 0.002
+  discovery_verified:
+    min: 1.0
+
+initial_condition_refs:
+  - name: polynomial_dataset
+    type: polynomial_dataset
+    parameters:
+      psi_amplitude: 1.0
+      spectral_components: 6
+      noise_level: 0.0
+      chi_noise: 0.0
+
+constraints:
+  - name: chi_polynomial_truth
+    expression: |
+      0.15
+      + 0.28 * psi_real
+      - 0.12 * psi_imag
+      + 0.20 * psi_real**2
+      + 0.25 * psi_imag**2
+      - 0.05 * psi_real * psi_imag
+      + 0.08 * psi_real**3
+      - 0.04 * psi_imag**3
+      + 0.03 * psi_real * psi_imag**2
+      + 0.02 * log(psi_real**2 + psi_imag**2 + 1.0e-3)
+    variables: [psi_real, psi_imag, chi]
+    target: chi
+    dependencies: []
+    weight: 25.0
+
+  - name: chi_dot_relax
+    expression: chi_dot - 0.4 * (chi - (
+        0.15
+        + 0.28 * psi_real
+        - 0.12 * psi_imag
+        + 0.20 * psi_real**2
+        + 0.25 * psi_imag**2
+        - 0.05 * psi_real * psi_imag
+        + 0.08 * psi_real**3
+        - 0.04 * psi_imag**3
+        + 0.03 * psi_real * psi_imag**2
+        + 0.02 * log(psi_real**2 + psi_imag**2 + 1.0e-3)
+      ))
+    variables: [psi_real, psi_imag, chi, chi_dot]
+    target: chi_dot
+    dependencies: [chi_polynomial_truth]
+    weight: 5.0
+
+metadata:
+  description: "Phase I calibration scenario: DSAC must rediscover a mixed polynomial/log law linking χ to ψ fields."
+  max_workers: 9
+  constraint_backend:
+    type: taichi
+    arch: cpu
+    cpu_max_num_threads: auto
+    fusion_policy: auto
+    parallelize: auto
+    inner_iterations: 2
+    tile_shape: auto
+    use_vectorized: true
+  freeze_fields: true
+  polynomial_dataset:
+    psi_amplitude: 1.0
+    spectral_components: 6
+    noise_level: 0.0
+    chi_noise: 0.0
+  discovery_features:
+    - name: psi_real
+      expression: psi_real
+    - name: psi_imag
+      expression: psi_imag
+    - name: psi_real_sq
+      expression: psi_real**2
+    - name: psi_imag_sq
+      expression: psi_imag**2
+    - name: psi_r_pi
+      expression: psi_real * psi_imag
+    - name: psi_real_cu
+      expression: psi_real**3
+    - name: psi_imag_cu
+      expression: psi_imag**3
+    - name: psi_r_pii
+      expression: psi_real * psi_imag**2
+    - name: log_radius
+      expression: log(psi_real**2 + psi_imag**2 + 1.0e-3)
+    - name: bias
+      expression: 1.0
+  discovery_truth:
+    psi_real: 0.28
+    psi_imag: -0.12
+    psi_real_sq: 0.20
+    psi_imag_sq: 0.25
+    psi_r_pi: -0.05
+    psi_real_cu: 0.08
+    psi_imag_cu: -0.04
+    psi_r_pii: 0.03
+    log_radius: 0.02
+    bias: 0.15
+  discovery_truth_expression: |
+    0.15
+    + 0.28 * psi_real
+    - 0.12 * psi_imag
+    + 0.20 * psi_real**2
+    + 0.25 * psi_imag**2
+    - 0.05 * psi_real * psi_imag
+    + 0.08 * psi_real**3
+    - 0.04 * psi_imag**3
+    + 0.03 * psi_real * psi_imag**2
+    + 0.02 * log(psi_real**2 + psi_imag**2 + 1.0e-3)
+  discovery_target_expression: chi
+  discovery_include_bias: false
+  coefficient_tolerance: 0.001
+  max_coefficient_tolerance: 0.002
+  residual_tolerance: 0.015
+  verification_window: 60
+  expected_behavior: "System should recover all coefficients (linear, quadratic, cubic, log) within 1e-3, maintain residual RMS < 0.015, and sustain the verification streak once aligned."

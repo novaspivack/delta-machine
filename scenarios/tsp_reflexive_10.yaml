@@ -1,0 +1,90 @@
+name: "Reflexive TSP Transport (10-city prototype)"
+description: "Hamiltonian tour synthesis for a 10-city circular lattice embedding."
+scenario_type: tsp_reflexive
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 8000
+initial_condition_refs:
+  - name: tsp_uniform_warm_start
+    type: tsp_warm_start
+    parameters:
+      num_cities: 10
+      embedding_row_start: 3
+      embedding_col_start: 3
+      noise_level: 0.05
+
+constraints:
+  - name: psi_imag_sync
+    expression: chi - psi_imag
+    variables: [psi_imag]
+    target: psi_imag
+    dependencies: [chi]
+    weight: 0.05
+
+  - name: chi_decay
+    expression: chi * 0.02
+    variables: [chi]
+    target: chi
+    dependencies: []
+    weight: 0.08
+
+  - name: chi_dot_decay
+    expression: 0.0
+    variables: [chi_dot]
+    target: chi_dot
+    dependencies: []
+    weight: 0.08
+
+halting_criteria:
+  success_condition: tour_verified
+  max_steps: 8000
+  dissonance_plateau_steps: 180
+  dissonance_plateau_tolerance: 0.0015
+
+success_metrics:
+  tour_verified:
+    min: 1.0
+  doubly_stochastic_error:
+    max: 0.02
+  tour_cost_gap:
+    max: 0.05
+
+metadata:
+  notes_ref: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/notes/1.5_dsac_scenario_roadmap.md"
+  description: "10-city Sinkhorn + reflexive subtour suppression stress test."
+  max_workers: 9
+  lattice_usage_margin: 4
+  meta_control:
+    reaction_decay: 0.93
+    temperature_gain: 0.05
+    drive_gain: 0.35
+    beta_gain: 6.5
+    sinkhorn_extra_max: 10
+    perturbation_threshold: 6.0e-4
+    perturbation_cooldown: 140
+    perturbation_strength: 0.03
+    temperature_leak: 0.02
+  tsp:
+    num_cities: 10
+    row_start: 3
+    col_start: 3
+    beta: 6.5
+    epsilon: 1.0e-6
+    sinkhorn_iterations: 12
+    stochasticity_tolerance: 0.02
+    assignment_threshold: 0.5
+    cost_gap_target: 0.05
+    city_positions:
+      - [0.9, 0.5]
+      - [0.8236067977499789, 0.7351141009169893]
+      - [0.623606797749979, 0.8804226065180615]
+      - [0.37639320225002104, 0.8804226065180615]
+      - [0.1763932022500211, 0.7351141009169894]
+      - [0.1, 0.5]
+      - [0.17639320225002104, 0.26488589908301074]
+      - [0.37639320225002093, 0.11957739348193857]
+      - [0.6236067977499791, 0.11957739348193854]
+      - [0.823606797749979, 0.2648858990830107]
+    optimal_tour: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    optimal_cost: 2.4721359549995796
+  expected_behavior: "Reflexive Sinkhorn dynamics plus subtour suppression converge to the circular Hamiltonian tour within 5% of the optimal reference (matching the brute-force cost)."

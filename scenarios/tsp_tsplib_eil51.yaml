@@ -1,0 +1,249 @@
+name: Reflexive TSP (TSPLIB eil51)
+description: Normalized TSPLIB eil51 instance
+scenario_type: tsp_reflexive
+lattice:
+- 64
+- 64
+timestep: 0.02
+max_steps: 22000
+initial_condition_refs:
+- name: tsp_uniform_warm_start
+  type: tsp_warm_start
+  parameters:
+    num_cities: 51
+    embedding_row_start: 1
+    embedding_col_start: 1
+    noise_level: 0.1
+constraints:
+- name: psi_imag_sync
+  expression: chi - psi_imag
+  variables:
+  - psi_imag
+  target: psi_imag
+  dependencies:
+  - chi
+  weight: 0.05
+- name: chi_decay
+  expression: chi * 0.02
+  variables:
+  - chi
+  target: chi
+  dependencies: []
+  weight: 0.08
+- name: chi_dot_decay
+  expression: '0.0'
+  variables:
+  - chi_dot
+  target: chi_dot
+  dependencies: []
+  weight: 0.08
+halting_criteria:
+  success_condition: tour_verified
+  max_steps: 22000
+  dissonance_plateau_steps: 510
+  dissonance_plateau_tolerance: 0.0015
+success_metrics:
+  tour_verified:
+    min: 1.0
+  doubly_stochastic_error:
+    max: 0.02
+  tour_cost_gap:
+    max: 0.05
+metadata:
+  notes_ref: /Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle
+    Derivations/Optimizer new tests/Delta_machine/notes/1.5_dsac_scenario_roadmap.md
+  description: Normalized TSPLIB eil51 instance
+  max_workers: 9
+  lattice_usage_margin: 4
+  meta_control:
+    reaction_decay: 0.93
+    temperature_gain: 0.05
+    drive_gain: 0.35
+    beta_gain: 6.5
+    sinkhorn_extra_max: 10
+    perturbation_threshold: 6.0e-4
+    perturbation_cooldown: 140
+    perturbation_strength: 0.03
+    temperature_leak: 0.02
+  tsp:
+    num_cities: 51
+    row_start: 1
+    col_start: 1
+    beta: 8.0
+    epsilon: 1.0e-06
+    sinkhorn_iterations: 25
+    stochasticity_tolerance: 0.02
+    assignment_threshold: 0.42
+    cost_gap_target: 0.05
+    city_positions:
+    - - 0.5517241379310345
+      - 0.7301587301587301
+    - - 0.7586206896551724
+      - 0.6825396825396826
+    - - 0.8103448275862069
+      - 0.9206349206349206
+    - - 0.25862068965517243
+      - 0.31746031746031744
+    - - 0.603448275862069
+      - 0.38095238095238093
+    - - 0.27586206896551724
+      - 0.6507936507936508
+    - - 0.20689655172413793
+      - 0.9047619047619048
+    - - 0.4482758620689655
+      - 0.8888888888888888
+    - - 0.8103448275862069
+      - 0.42857142857142855
+    - - 0.7931034482758621
+      - 0.23809523809523808
+    - - 0.6379310344827587
+      - 0.5555555555555556
+    - - 0.4482758620689655
+      - 0.4126984126984127
+    - - 0.0
+      - 0.30158730158730157
+    - - 0.1206896551724138
+      - 0.5714285714285714
+    - - 0.5344827586206896
+      - 0.15873015873015872
+    - - 0.8103448275862069
+      - 0.5555555555555556
+    - - 0.3793103448275862
+      - 0.2698412698412698
+    - - 0.20689655172413793
+      - 0.42857142857142855
+    - - 0.13793103448275862
+      - 0.1111111111111111
+    - - 0.896551724137931
+      - 0.8253968253968254
+    - - 0.9827586206896551
+      - 0.5714285714285714
+    - - 0.6379310344827587
+      - 0.8095238095238095
+    - - 0.1896551724137931
+      - 0.8095238095238095
+    - - 0.05172413793103448
+      - 0.7301587301587301
+    - - 0.034482758620689655
+      - 0.5079365079365079
+    - - 0.3793103448275862
+      - 0.9841269841269841
+    - - 0.43103448275862066
+      - 0.6666666666666666
+    - - 0.6551724137931034
+      - 0.9682539682539683
+    - - 0.9137931034482759
+      - 0.6666666666666666
+    - - 0.9137931034482759
+      - 0.3333333333333333
+    - - 0.5517241379310345
+      - 1.0
+    - - 0.5689655172413793
+      - 0.6349206349206349
+    - - 0.7068965517241379
+      - 0.06349206349206349
+    - - 0.9655172413793104
+      - 0.42857142857142855
+    - - 0.9827586206896551
+      - 0.9047619047619048
+    - - 1.0
+      - 1.0
+    - - 0.46551724137931033
+      - 0.25396825396825395
+    - - 0.6896551724137931
+      - 0.4603174603174603
+    - - 0.9310344827586207
+      - 0.14285714285714285
+    - - 0.0
+      - 0.0
+    - - 0.08620689655172414
+      - 0.1746031746031746
+    - - 0.27586206896551724
+      - 0.06349206349206349
+    - - 0.0
+      - 0.9206349206349206
+    - - 0.43103448275862066
+      - 0.14285714285714285
+    - - 0.5862068965517241
+      - 0.06349206349206349
+    - - 0.46551724137931033
+      - 0.5238095238095238
+    - - 0.3448275862068966
+      - 0.4126984126984127
+    - - 0.3448275862068966
+      - 0.7777777777777778
+    - - 0.7413793103448276
+      - 0.3492063492063492
+    - - 0.8793103448275862
+      - 0.49206349206349204
+    - - 0.43103448275862066
+      - 0.5396825396825397
+    optimal_tour:
+    - 0
+    - 21
+    - 1
+    - 15
+    - 49
+    - 8
+    - 29
+    - 33
+    - 20
+    - 28
+    - 19
+    - 34
+    - 35
+    - 2
+    - 27
+    - 30
+    - 7
+    - 25
+    - 6
+    - 42
+    - 23
+    - 22
+    - 47
+    - 5
+    - 26
+    - 50
+    - 45
+    - 11
+    - 46
+    - 3
+    - 17
+    - 13
+    - 24
+    - 12
+    - 40
+    - 39
+    - 18
+    - 41
+    - 43
+    - 16
+    - 36
+    - 14
+    - 44
+    - 32
+    - 38
+    - 9
+    - 48
+    - 4
+    - 37
+    - 10
+    - 31
+    optimal_cost: 7.0881768454223835
+  expected_behavior: DSAC matches the TSPLIB optimal tour while providing reflexive
+    diagnostics.
+  oscillation_guard:
+    window: 35
+    tolerance: 0.0025
+    perturbation_strength: 0.02
+  meta_control:
+    reaction_decay: 0.94
+    temperature_gain: 0.05
+    drive_gain: 0.4
+    beta_gain: 6.5
+    sinkhorn_extra_max: 10
+    perturbation_threshold: 0.0006
+    perturbation_cooldown: 140
+    perturbation_strength: 0.03
+    temperature_leak: 0.02

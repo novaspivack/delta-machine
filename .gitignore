@@ -1,0 +1,17 @@
+runs/
+__pycache__/
+*.py[cod]
+.ruff_cache/
+.cursor/
+logs/
+.DS_Store
+*.npz
+*.egg-info/
+.eggs/
+.env
+.envrc
+
+# Internal/private files — must never be committed to public repo
+notes/
+1.0_Delta_machine_notes.md
+docs/DELTA_MACHINE_SPINOUT_IMPACT_ANALYSIS.md

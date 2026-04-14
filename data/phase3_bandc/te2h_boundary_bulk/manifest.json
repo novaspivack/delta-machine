@@ -1,0 +1,403 @@
+{
+  "schema": "te2h_boundary_bulk_v1",
+  "config": {
+    "lattice_shape": [
+      128,
+      128
+    ],
+    "boundary_depth": 4,
+    "topologies": [
+      "torus",
+      "cylinder",
+      "open"
+    ],
+    "num_samples": 16,
+    "include_noise": true
+  },
+  "samples": [
+    {
+      "topology": "torus",
+      "sample_index": 0,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_000.npz",
+      "seed": 524034236,
+      "compression_ratio": 0.1756193976308972,
+      "relative_entropy": 2.339185305523367
+    },
+    {
+      "topology": "torus",
+      "sample_index": 1,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_001.npz",
+      "seed": 1235740999,
+      "compression_ratio": 0.20658509562424432,
+      "relative_entropy": 2.242672394466596
+    },
+    {
+      "topology": "torus",
+      "sample_index": 2,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_002.npz",
+      "seed": 1030281948,
+      "compression_ratio": 0.16918681813607545,
+      "relative_entropy": 2.4657320123584983
+    },
+    {
+      "topology": "torus",
+      "sample_index": 3,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_003.npz",
+      "seed": 2174455090,
+      "compression_ratio": 0.1708595972373152,
+      "relative_entropy": 2.4814391499538937
+    },
+    {
+      "topology": "torus",
+      "sample_index": 4,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_004.npz",
+      "seed": 956690274,
+      "compression_ratio": 0.1956523193021409,
+      "relative_entropy": 2.3794561877854585
+    },
+    {
+      "topology": "torus",
+      "sample_index": 5,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_005.npz",
+      "seed": 3158169137,
+      "compression_ratio": 0.1857640400243835,
+      "relative_entropy": 2.3254465758902096
+    },
+    {
+      "topology": "torus",
+      "sample_index": 6,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_006.npz",
+      "seed": 3283775552,
+      "compression_ratio": 0.20564995964290106,
+      "relative_entropy": 2.1709423822564364
+    },
+    {
+      "topology": "torus",
+      "sample_index": 7,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_007.npz",
+      "seed": 3925189738,
+      "compression_ratio": 0.19217146480274566,
+      "relative_entropy": 2.2128822663588092
+    },
+    {
+      "topology": "torus",
+      "sample_index": 8,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_008.npz",
+      "seed": 1726840280,
+      "compression_ratio": 0.1555840338757703,
+      "relative_entropy": 2.3579270625149773
+    },
+    {
+      "topology": "torus",
+      "sample_index": 9,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_009.npz",
+      "seed": 5338831,
+      "compression_ratio": 0.18352398540891493,
+      "relative_entropy": 2.2117579384670005
+    },
+    {
+      "topology": "torus",
+      "sample_index": 10,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_010.npz",
+      "seed": 4007136977,
+      "compression_ratio": 0.18963124155815037,
+      "relative_entropy": 2.285925145974246
+    },
+    {
+      "topology": "torus",
+      "sample_index": 11,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_011.npz",
+      "seed": 1685402060,
+      "compression_ratio": 0.2180545853392032,
+      "relative_entropy": 2.1229218330038964
+    },
+    {
+      "topology": "torus",
+      "sample_index": 12,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_012.npz",
+      "seed": 4077537018,
+      "compression_ratio": 0.2489719561901848,
+      "relative_entropy": 2.013047422110173
+    },
+    {
+      "topology": "torus",
+      "sample_index": 13,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_013.npz",
+      "seed": 3023035473,
+      "compression_ratio": 0.18631404120325992,
+      "relative_entropy": 2.345351376351931
+    },
+    {
+      "topology": "torus",
+      "sample_index": 14,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_014.npz",
+      "seed": 770657539,
+      "compression_ratio": 0.19479887415386177,
+      "relative_entropy": 2.2134423232647564
+    },
+    {
+      "topology": "torus",
+      "sample_index": 15,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/torus/sample_015.npz",
+      "seed": 1453236999,
+      "compression_ratio": 0.2089139090234059,
+      "relative_entropy": 2.109064883399907
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 0,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_000.npz",
+      "seed": 4123825067,
+      "compression_ratio": 0.2279219636041965,
+      "relative_entropy": 2.4234469765667193
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 1,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_001.npz",
+      "seed": 3388591917,
+      "compression_ratio": 0.20180274463368025,
+      "relative_entropy": 2.7944899747193723
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 2,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_002.npz",
+      "seed": 3598355451,
+      "compression_ratio": 0.25966092208018104,
+      "relative_entropy": 2.399557396092428
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 3,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_003.npz",
+      "seed": 2046449769,
+      "compression_ratio": 0.1989127664339107,
+      "relative_entropy": 2.6339473433051643
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 4,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_004.npz",
+      "seed": 4004016844,
+      "compression_ratio": 0.2544333724595604,
+      "relative_entropy": 2.383995358537063
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 5,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_005.npz",
+      "seed": 379995403,
+      "compression_ratio": 0.21073223531200266,
+      "relative_entropy": 2.5516021947760725
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 6,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_006.npz",
+      "seed": 138142121,
+      "compression_ratio": 0.21339028922518716,
+      "relative_entropy": 2.8477519727501956
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 7,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_007.npz",
+      "seed": 529625694,
+      "compression_ratio": 0.19486587492403332,
+      "relative_entropy": 2.649942931283663
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 8,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_008.npz",
+      "seed": 1076621852,
+      "compression_ratio": 0.24302478061994676,
+      "relative_entropy": 2.4306537603031013
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 9,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_009.npz",
+      "seed": 2446232360,
+      "compression_ratio": 0.24606589438917686,
+      "relative_entropy": 2.3840135571485215
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 10,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_010.npz",
+      "seed": 920394010,
+      "compression_ratio": 0.24326944721811164,
+      "relative_entropy": 2.418042339625023
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 11,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_011.npz",
+      "seed": 1830250714,
+      "compression_ratio": 0.22827157423837444,
+      "relative_entropy": 2.5114657454035227
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 12,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_012.npz",
+      "seed": 2125811387,
+      "compression_ratio": 0.18863176623145034,
+      "relative_entropy": 2.741213358862934
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 13,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_013.npz",
+      "seed": 3055911147,
+      "compression_ratio": 0.22566879726329184,
+      "relative_entropy": 2.872145353637274
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 14,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_014.npz",
+      "seed": 1306495250,
+      "compression_ratio": 0.2362654751393505,
+      "relative_entropy": 2.463574780132346
+    },
+    {
+      "topology": "cylinder",
+      "sample_index": 15,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/cylinder/sample_015.npz",
+      "seed": 3832385390,
+      "compression_ratio": 0.15785137235208485,
+      "relative_entropy": 2.72340312283321
+    },
+    {
+      "topology": "open",
+      "sample_index": 0,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_000.npz",
+      "seed": 3014418467,
+      "compression_ratio": 0.3086555141778364,
+      "relative_entropy": 2.324868927630847
+    },
+    {
+      "topology": "open",
+      "sample_index": 1,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_001.npz",
+      "seed": 2012100733,
+      "compression_ratio": 0.30438689384069856,
+      "relative_entropy": 2.34381170112941
+    },
+    {
+      "topology": "open",
+      "sample_index": 2,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_002.npz",
+      "seed": 101727047,
+      "compression_ratio": 0.22751224506370174,
+      "relative_entropy": 2.614726014744482
+    },
+    {
+      "topology": "open",
+      "sample_index": 3,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_003.npz",
+      "seed": 3569951612,
+      "compression_ratio": 0.2518580489939115,
+      "relative_entropy": 2.2853791951523696
+    },
+    {
+      "topology": "open",
+      "sample_index": 4,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_004.npz",
+      "seed": 3140847656,
+      "compression_ratio": 0.28269823242310993,
+      "relative_entropy": 2.2914542044821897
+    },
+    {
+      "topology": "open",
+      "sample_index": 5,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_005.npz",
+      "seed": 2243252656,
+      "compression_ratio": 0.26389462285584975,
+      "relative_entropy": 2.3805538495175504
+    },
+    {
+      "topology": "open",
+      "sample_index": 6,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_006.npz",
+      "seed": 3026627428,
+      "compression_ratio": 0.34746223358161266,
+      "relative_entropy": 2.040560825228649
+    },
+    {
+      "topology": "open",
+      "sample_index": 7,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_007.npz",
+      "seed": 3416994952,
+      "compression_ratio": 0.2983876192469725,
+      "relative_entropy": 2.436666607186978
+    },
+    {
+      "topology": "open",
+      "sample_index": 8,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_008.npz",
+      "seed": 4071307903,
+      "compression_ratio": 0.31358834237735383,
+      "relative_entropy": 2.2379500606543767
+    },
+    {
+      "topology": "open",
+      "sample_index": 9,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_009.npz",
+      "seed": 3116118218,
+      "compression_ratio": 0.26633213030704256,
+      "relative_entropy": 2.273693870412078
+    },
+    {
+      "topology": "open",
+      "sample_index": 10,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_010.npz",
+      "seed": 3661730103,
+      "compression_ratio": 0.23214226502051155,
+      "relative_entropy": 2.4935926988932353
+    },
+    {
+      "topology": "open",
+      "sample_index": 11,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_011.npz",
+      "seed": 2915718528,
+      "compression_ratio": 0.27871037164077456,
+      "relative_entropy": 2.299852113823248
+    },
+    {
+      "topology": "open",
+      "sample_index": 12,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_012.npz",
+      "seed": 3693813420,
+      "compression_ratio": 0.28893706577299,
+      "relative_entropy": 2.327719022305168
+    },
+    {
+      "topology": "open",
+      "sample_index": 13,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_013.npz",
+      "seed": 888070421,
+      "compression_ratio": 0.30203123149116,
+      "relative_entropy": 2.272229770621733
+    },
+    {
+      "topology": "open",
+      "sample_index": 14,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_014.npz",
+      "seed": 142902494,
+      "compression_ratio": 0.31212575302369594,
+      "relative_entropy": 2.2076223010524423
+    },
+    {
+      "topology": "open",
+      "sample_index": 15,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk/open/sample_015.npz",
+      "seed": 3721620069,
+      "compression_ratio": 0.28355464287759485,
+      "relative_entropy": 2.464583868785221
+    }
+  ]
+}

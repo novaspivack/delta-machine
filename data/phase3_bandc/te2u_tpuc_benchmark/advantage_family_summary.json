@@ -1,0 +1,50 @@
+{
+  "reflexive_linear_system": {
+    "runs": [
+      {
+        "run_id": "20251118_143603",
+        "reflexive_speedup": 58908.48223769971,
+        "accuracy_delta": 0.05439430522750941,
+        "information_profit": 0.40069915515583415,
+        "holographic_capacity": 1.0,
+        "tpuc_energy_joules": 1.0017435754459427
+      }
+    ],
+    "mean_speedup": 58908.48223769971,
+    "min_speedup": 58908.48223769971,
+    "max_speedup": 58908.48223769971,
+    "mean_energy_joules": 1.0017435754459427
+  },
+  "holographic_quadratic": {
+    "runs": [
+      {
+        "run_id": "20251118_143738",
+        "reflexive_speedup": 6854.201501242579,
+        "accuracy_delta": 0.008236450072861529,
+        "information_profit": 0.12677202491190304,
+        "holographic_capacity": 1.0,
+        "tpuc_energy_joules": 1.03789997237218
+      }
+    ],
+    "mean_speedup": 6854.201501242579,
+    "min_speedup": 6854.201501242579,
+    "max_speedup": 6854.201501242579,
+    "mean_energy_joules": 1.03789997237218
+  },
+  "reflexive_sat": {
+    "runs": [
+      {
+        "run_id": "20251118_143911",
+        "reflexive_speedup": 58908.48223769971,
+        "accuracy_delta": 0.003479777879559205,
+        "information_profit": 0.12237205088762931,
+        "holographic_capacity": 1.0,
+        "tpuc_energy_joules": 0.9841463835051176
+      }
+    ],
+    "mean_speedup": 58908.48223769971,
+    "min_speedup": 58908.48223769971,
+    "max_speedup": 58908.48223769971,
+    "mean_energy_joules": 0.9841463835051176
+  }
+}

@@ -1,0 +1,92 @@
+# Scenario specification for DSAC constraint discovery experiment.
+# Refer to notes/1.5_dsac_scenario_roadmap.md for context and metrics.
+name: Constraint Discovery
+scenario_type: discovery
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 15000
+
+halting_criteria:
+  dissonance_plateau_steps: 200
+  dissonance_plateau_tolerance: 0.0005
+  max_steps: 15000
+  success_condition: discovery_verified
+
+success_metrics:
+  coefficient_error:
+    max: 0.02
+  residual_rms:
+    max: 0.03
+  discovery_verified:
+    min: 1.0
+
+initial_condition_refs:
+  - name: random_sparse
+    type: random
+    parameters:
+      psi_amplitude: 0.3
+      chi_amplitude: 0.05
+  - name: soliton_core
+    type: soliton
+    parameters:
+      amplitude: 1.5
+      width: 4.0
+      charge: 1
+  - name: braided_pattern
+    type: pattern
+    parameters:
+      amplitude: 1.0
+      vortex_strength: 0.8
+
+constraints:
+  - name: psi_self_interaction
+    expression: psi_real - 0.4 * psi_real * (psi_real**2 + psi_imag**2 - 1.0)
+    variables: [psi_real, psi_imag]
+    target: psi_real
+    dependencies: []
+    weight: 1.0
+
+  - name: psi_imag_reflexive
+    expression: psi_imag - 0.4 * psi_imag * (psi_real**2 + psi_imag**2 - 1.0) + 0.2 * psi_real * chi
+    variables: [psi_real, psi_imag, chi]
+    target: psi_imag
+    dependencies: [psi_self_interaction]
+    weight: 1.0
+
+  - name: chi_emergent
+    expression: chi - 0.2 * (psi_real**2 + psi_imag**2)
+    variables: [psi_real, psi_imag, chi]
+    target: chi
+    dependencies: [psi_self_interaction, psi_imag_reflexive]
+    weight: 20.0
+
+  - name: chi_dot_dynamic
+    expression: chi_dot - 0.5 * (chi - 0.2 * (psi_real**2 + psi_imag**2))
+    variables: [psi_real, psi_imag, chi, chi_dot]
+    target: chi_dot
+    dependencies: [chi_emergent]
+    weight: 10.0
+
+metadata:
+  constraint_backend:
+    type: taichi
+    arch: cpu
+    cpu_max_num_threads: auto
+    fusion_policy: auto
+    parallelize: auto
+    inner_iterations: 2
+    tile_shape: [8, 8]
+    block_dim: 64
+    use_vectorized: true
+  description: "Reflexive constraint discovery: DSAC should infer the latent relation between χ and the ψ field without explicit hard-coding of coefficients."
+  discovery_model:
+    form: "chi = alpha * psi_real^2 + beta * psi_imag^2 + gamma"
+    alpha: 0.2
+    beta: 0.2
+    gamma: 0.0
+  coefficient_tolerance: 0.02
+  residual_tolerance: 0.03
+  verification_window: 50
+  discovery_use_model: true
+  expected_behavior: "System should infer the quadratic coupling coefficients linking χ to ψ fields and plateau with low residual error once the discovered model matches the hidden ground truth."
+

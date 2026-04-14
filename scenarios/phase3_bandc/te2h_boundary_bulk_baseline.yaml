@@ -1,0 +1,94 @@
+name: "Band C TE₂.H Boundary↔Bulk Baseline"
+description: "Reflexive holographic equivalence calibration using paired PR-0 boundary and bulk states."
+scenario_type: discovery
+lattice: [128, 128]
+timestep: 0.006
+max_steps: 12000
+
+halting_criteria:
+  max_steps: 12000
+  dissonance_plateau_steps: 2400
+  dissonance_plateau_tolerance: 3.0e-6
+  stagnation_window: 1800
+  stagnation_relative_delta: 5.0e-4
+  periodic_window: 360
+  periodic_tolerance: 2.5e-4
+  periodic_min_cycles: 3
+  periodic_min_amplitude: 1.5e-3
+  success_condition: discovery_verified
+
+success_metrics:
+  transport_residual_rms:
+    max: 4.0
+  transport_mape_trimmed:
+    max: 1.02
+  discovery_verified:
+    min: 1.0
+
+initial_condition_refs:
+  - name: te2h_boundary_bulk
+    type: boundary_bulk_dataset
+    parameters:
+      dataset_dir: /Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2h_boundary_bulk
+
+metadata:
+  notes_ref: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/notes/1.38_phase3_bandc_experiments_plan.md"
+  dataset_builder: "delta_machine.scenarios.band_c.te2h_reflexive_holographic_equivalence.boundary_bulk_dataset"
+  instrumentation_module: "delta_machine.scenarios.band_c.te2h_reflexive_holographic_equivalence.boundary_bulk_instrumentation"
+  instrumentation_function: "compute_boundary_bulk_metrics"
+  boundary_depth: 4
+  topology_choices: ["torus", "cylinder", "open"]
+  discovery_burn_in_steps: 600
+  discovery_sample_interval: 4
+  discovery_fit_interval: 160
+  discovery_fit_min_samples: 512
+  discovery_include_bias: false
+  discovery_features:
+    - name: psi_boundary
+      expression: "np.where(np.abs(chi) > 1.0e-6, psi_real, 0.0)"
+    - name: boundary_mask
+      expression: "np.where(np.abs(chi) > 1.0e-6, 1.0, 0.0)"
+  discovery_target_expression: "chi"
+  discovery_truth:
+    psi_boundary: 1.0
+    boundary_mask: 0.0
+  discovery_ignore_coefficients: true
+  residual_tolerance: 4.0
+  coefficient_tolerance: 1.0
+  max_coefficient_tolerance: 1.0
+  verification_window: 3
+
+constraint_backend:
+  type: taichi
+  arch: cpu
+  fusion_policy: auto
+  inner_iterations: 2
+  tile_shape: [8, 8]
+  use_vectorized: true
+  relaxation_rate: 1.0e-4
+
+logging:
+  capture_boundary_slice: true
+  capture_bulk_snapshot: true
+
+constraints:
+  - name: boundary_alignment
+    expression: chi - psi_real
+    variables: ["chi", "psi_real"]
+    target: chi
+    weight: 0.65
+  - name: bulk_consistency
+    expression: psi_real
+    variables: ["psi_real"]
+    target: psi_real
+    weight: 0.08
+  - name: holographic_drift
+    expression: chi_dot - (psi_real - chi)
+    variables: ["chi_dot", "psi_real", "chi"]
+    target: chi_dot
+    weight: 0.18
+  - name: boundary_phase_lock
+    expression: psi_imag
+    variables: ["psi_imag"]
+    target: psi_imag
+    weight: 0.02

@@ -1,0 +1,85 @@
+name: "Band C TE₂.U TPU-C Advantage Baseline"
+description: "Benchmark reflexive DSAC runs on TPU-C workloads versus classical solvers."
+scenario_type: discovery
+lattice: [48, 48]
+timestep: 0.005
+max_steps: 4500
+inner_iterations: 3
+
+halting_criteria:
+  max_steps: 4500
+  dissonance_plateau_steps: 1800
+  dissonance_plateau_tolerance: 4.0e-6
+  stagnation_window: 1500
+  stagnation_relative_delta: 4.0e-4
+  periodic_window: 300
+  periodic_tolerance: 2.0e-4
+  periodic_min_cycles: 3
+  periodic_min_amplitude: 1.0e-3
+  success_condition: null
+
+success_metrics:
+  chi_solution_error:
+    max: 0.01
+  transport_residual_rms:
+    max: 0.25
+  transport_mape_trimmed:
+    max: 1.1
+
+initial_condition_refs:
+  - name: te2u_tpuc
+    type: tpuc_benchmark_dataset
+    parameters:
+      dataset_dir: /Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2u_tpuc_benchmark
+      family: reflexive_linear_system # set to holographic_quadratic and reflexive_sat for full coverage, reflexive_linear_system is the default
+
+metadata:
+  notes_ref: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/notes/1.38_phase3_bandc_experiments_plan.md"
+  disable_drive: true
+  disable_relaxation: true
+  dataset_builder: "delta_machine.scenarios.band_c.te2u_strong_transputational_universality.tpuc_dataset"
+  instrumentation_module: "delta_machine.scenarios.band_c.te2u_strong_transputational_universality.tpuc_metrics"
+  instrumentation_function: "compute_tpuc_advantage_metrics"
+  tpuc_profiles: ["reflexive_linear_system", "holographic_quadratic", "reflexive_sat"]
+  max_workers: 9
+  constraint_backend:
+    type: numpy
+    relaxation_rate: 1.0e-4
+  discovery_burn_in_steps: 200
+  discovery_sample_interval: 3
+  discovery_fit_interval: 90
+  discovery_fit_min_samples: 16
+  discovery_include_bias: false
+  discovery_features:
+    - name: classical_solution
+      expression: "chi_reference"
+    - name: correction
+      expression: "chi - chi_reference"
+  discovery_target_expression: "chi"
+  discovery_truth:
+    classical_solution: 1.0
+    correction: 0.0
+  discovery_ignore_coefficients: false
+  residual_tolerance: 0.12
+  coefficient_tolerance: 0.2
+  max_coefficient_tolerance: 0.25
+  verification_window: 4
+  log_tpuc_advantage: true
+  tpuc_log_interval: 50
+
+logging:
+  capture_solution_snapshots: true
+  capture_tpuc_traces: true
+  metrics_sample_interval: 50
+
+constraints:
+  - name: chi_solution_lock
+    expression: chi_reference
+    variables: ["chi_reference"]
+    target: chi
+    weight: 5.0
+  - name: chi_velocity_damp
+    expression: 0.0
+    variables: []
+    target: chi_dot
+    weight: 0.5

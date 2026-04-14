@@ -1,0 +1,93 @@
+name: "Band C TE₂.RG Multiscale β Baseline"
+description: "PR-0 multi-scale DSAC ensemble for empirical β-function estimation."
+scenario_type: discovery
+lattice: [128, 128]
+timestep: 0.008
+max_steps: 10000
+
+halting_criteria:
+  max_steps: 10000
+  dissonance_plateau_steps: 2000
+  dissonance_plateau_tolerance: 6.0e-6
+  stagnation_window: 2200
+  stagnation_relative_delta: 4.0e-4
+  periodic_window: 400
+  periodic_tolerance: 2.5e-4
+  periodic_min_cycles: 3
+  periodic_min_amplitude: 8.0e-4
+  success_condition: null
+
+success_metrics:
+  residual_rms:
+    max: 0.04
+  discovery_verified:
+    min: 1.0
+
+initial_condition_refs:
+  - name: te2rg_multiscale
+    type: multiscale_pr0_dataset
+    parameters:
+      dataset_dir: /Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale
+      scale: 2
+
+metadata:
+  notes_ref: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/notes/1.38_phase3_bandc_experiments_plan.md"
+  dataset_builder: "delta_machine.scenarios.band_c.te2rg_reflexive_rg_flow.multiscale_dataset"
+  instrumentation_module: "delta_machine.scenarios.band_c.te2rg_reflexive_rg_flow.multiscale_beta_estimator"
+  instrumentation_function: "estimate_beta_function"
+  scales: [1, 2, 4, 8]
+  max_workers: 9
+  constraint_backend:
+    type: numpy
+    relaxation_rate: 4.0e-4
+  discovery_burn_in_steps: 400
+  discovery_sample_interval: 5
+  discovery_fit_interval: 150
+  discovery_fit_min_samples: 2048
+  discovery_include_bias: false
+  discovery_features:
+    - name: field
+      expression: "psi_real"
+    - name: grad_x_div
+      expression: "np.gradient(psi_imag, axis=0)"
+    - name: grad_y_div
+      expression: "np.gradient(chi, axis=1)"
+  discovery_target_expression: "chi_dot"
+  discovery_truth:
+    field: 0.0
+    grad_x_div: -0.0003
+    grad_y_div: 0.0100
+  discovery_ignore_coefficients: false
+  residual_tolerance: 0.04
+  coefficient_tolerance: 0.3
+  max_coefficient_tolerance: 0.35
+  verification_window: 5
+  log_multiscale_beta: true
+  beta_log_interval: 100
+
+logging:
+  capture_flux_divergence: true
+  capture_coupling_series: true
+  metrics_sample_interval: 50
+
+constraints:
+  - name: field_smoothing
+    expression: psi_real
+    variables: ["psi_real"]
+    target: psi_real
+    weight: 0.05
+  - name: gradient_alignment_x
+    expression: psi_imag
+    variables: ["psi_imag"]
+    target: psi_imag
+    weight: 0.05
+  - name: gradient_alignment_y
+    expression: chi
+    variables: ["chi"]
+    target: chi
+    weight: 0.05
+  - name: flux_consistency
+    expression: chi_dot
+    variables: ["chi_dot"]
+    target: chi_dot
+    weight: 0.05

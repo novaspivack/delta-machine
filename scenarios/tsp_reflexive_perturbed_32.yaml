@@ -1,0 +1,112 @@
+name: "Reflexive TSP Transport (32-city perturbed)"
+description: "Perturbed 32-city layout for aggressive crossover benchmarking."
+scenario_type: tsp_reflexive
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 18000
+initial_condition_refs:
+  - name: tsp_uniform_warm_start
+    type: tsp_warm_start
+    parameters:
+      num_cities: 32
+      embedding_row_start: 1
+      embedding_col_start: 1
+      noise_level: 0.1
+
+constraints:
+  - name: psi_imag_sync
+    expression: chi - psi_imag
+    variables: [psi_imag]
+    target: psi_imag
+    dependencies: [chi]
+    weight: 0.05
+
+  - name: chi_decay
+    expression: chi * 0.02
+    variables: [chi]
+    target: chi
+    dependencies: []
+    weight: 0.08
+
+  - name: chi_dot_decay
+    expression: 0.0
+    variables: [chi_dot]
+    target: chi_dot
+    dependencies: []
+    weight: 0.08
+
+halting_criteria:
+  success_condition: tour_verified
+  max_steps: 18000
+  dissonance_plateau_steps: 480
+  dissonance_plateau_tolerance: 0.0015
+
+success_metrics:
+  tour_verified:
+    min: 1.0
+  doubly_stochastic_error:
+    max: 0.02
+  tour_cost_gap:
+    max: 0.05
+
+metadata:
+  notes_ref: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/notes/1.5_dsac_scenario_roadmap.md"
+  description: "32-city perturbed topology (seed=123)"
+  max_workers: 9
+  lattice_usage_margin: 4
+  meta_control:
+    reaction_decay: 0.93
+    temperature_gain: 0.05
+    drive_gain: 0.35
+    beta_gain: 6.5
+    sinkhorn_extra_max: 10
+    perturbation_threshold: 6.0e-4
+    perturbation_cooldown: 140
+    perturbation_strength: 0.03
+    temperature_leak: 0.02
+  tsp:
+    num_cities: 32
+    row_start: 1
+    col_start: 1
+    beta: 8.0
+    epsilon: 1.0e-6
+    sinkhorn_iterations: 24
+    stochasticity_tolerance: 0.02
+    assignment_threshold: 0.42
+    cost_gap_target: 0.05
+    city_positions:
+      - [0.874655743457, 0.476099457379]
+      - [0.867238561452, 0.605234829954]
+      - [0.846455721555, 0.617403144814]
+      - [0.78142274268, 0.679307930695]
+      - [0.719185356312, 0.715427346563]
+      - [0.708144738718, 0.790432608491]
+      - [0.645867237871, 0.783591087652]
+      - [0.605067329432, 0.847286246119]
+      - [0.518149792184, 0.83469962419]
+      - [0.415672260228, 0.842985269431]
+      - [0.340436280994, 0.856867220267]
+      - [0.248421800281, 0.80992342754]
+      - [0.257366774953, 0.76999526594]
+      - [0.223405531272, 0.711813418685]
+      - [0.132909578098, 0.656849898773]
+      - [0.140235854281, 0.606388667336]
+      - [0.187117263594, 0.519224062039]
+      - [0.178881023088, 0.445948542704]
+      - [0.196093202456, 0.378773319802]
+      - [0.201619318679, 0.33279530283]
+      - [0.27725516165, 0.28980851096]
+      - [0.324980354639, 0.245492057637]
+      - [0.386860494192, 0.221227946064]
+      - [0.451789976271, 0.196456210495]
+      - [0.532992646388, 0.161181823898]
+      - [0.561888814408, 0.179669782172]
+      - [0.632014007394, 0.148918201716]
+      - [0.693699118914, 0.226876825621]
+      - [0.801402104947, 0.241657501263]
+      - [0.792281699394, 0.322603257349]
+      - [0.836188122047, 0.350561787941]
+      - [0.81083757222, 0.410390357015]
+    optimal_tour: [0, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    optimal_cost: 2.4389511736344494
+  expected_behavior: "Stress DSAC on 32-city perturbed layouts; observe runtime vs. OR-Tools before moving to TSPLIB/Concorde comparisons."

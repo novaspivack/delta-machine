@@ -1,0 +1,355 @@
+{
+  "schema": "te2rg_multiscale_v1",
+  "config": {
+    "base_shape": [
+      128,
+      128
+    ],
+    "scales": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "samples_per_scale": 12,
+    "include_flux": true
+  },
+  "samples": [
+    {
+      "scale": 1,
+      "sample_index": 0,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_000.npz",
+      "seed": 1694204633,
+      "norm": 1.0018341455241868
+    },
+    {
+      "scale": 1,
+      "sample_index": 1,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_001.npz",
+      "seed": 2415443444,
+      "norm": 1.0031097118107377
+    },
+    {
+      "scale": 1,
+      "sample_index": 2,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_002.npz",
+      "seed": 2480897721,
+      "norm": 1.003464399999225
+    },
+    {
+      "scale": 1,
+      "sample_index": 3,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_003.npz",
+      "seed": 2043185005,
+      "norm": 1.0017404210099894
+    },
+    {
+      "scale": 1,
+      "sample_index": 4,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_004.npz",
+      "seed": 3613376435,
+      "norm": 1.0025780212174118
+    },
+    {
+      "scale": 1,
+      "sample_index": 5,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_005.npz",
+      "seed": 2961803206,
+      "norm": 1.0038860283034128
+    },
+    {
+      "scale": 1,
+      "sample_index": 6,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_006.npz",
+      "seed": 218168802,
+      "norm": 1.0026625192922958
+    },
+    {
+      "scale": 1,
+      "sample_index": 7,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_007.npz",
+      "seed": 408677596,
+      "norm": 1.0037886776943785
+    },
+    {
+      "scale": 1,
+      "sample_index": 8,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_008.npz",
+      "seed": 6136124,
+      "norm": 1.003052742892454
+    },
+    {
+      "scale": 1,
+      "sample_index": 9,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_009.npz",
+      "seed": 3650509376,
+      "norm": 1.0039072398199058
+    },
+    {
+      "scale": 1,
+      "sample_index": 10,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_010.npz",
+      "seed": 4175998803,
+      "norm": 1.003701189336742
+    },
+    {
+      "scale": 1,
+      "sample_index": 11,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_01/sample_011.npz",
+      "seed": 2769176179,
+      "norm": 1.0036399489349208
+    },
+    {
+      "scale": 2,
+      "sample_index": 0,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_000.npz",
+      "seed": 358495067,
+      "norm": 0.9947406275323306
+    },
+    {
+      "scale": 2,
+      "sample_index": 1,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_001.npz",
+      "seed": 1373986516,
+      "norm": 0.9952040741831081
+    },
+    {
+      "scale": 2,
+      "sample_index": 2,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_002.npz",
+      "seed": 1604597110,
+      "norm": 0.9949873452687975
+    },
+    {
+      "scale": 2,
+      "sample_index": 3,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_003.npz",
+      "seed": 1795441160,
+      "norm": 0.9945266198378148
+    },
+    {
+      "scale": 2,
+      "sample_index": 4,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_004.npz",
+      "seed": 4198720376,
+      "norm": 0.994694963873874
+    },
+    {
+      "scale": 2,
+      "sample_index": 5,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_005.npz",
+      "seed": 645163223,
+      "norm": 0.9940654261647492
+    },
+    {
+      "scale": 2,
+      "sample_index": 6,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_006.npz",
+      "seed": 2900694983,
+      "norm": 0.9944799143156765
+    },
+    {
+      "scale": 2,
+      "sample_index": 7,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_007.npz",
+      "seed": 756056004,
+      "norm": 0.994517343150621
+    },
+    {
+      "scale": 2,
+      "sample_index": 8,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_008.npz",
+      "seed": 1406161646,
+      "norm": 0.9946595544103595
+    },
+    {
+      "scale": 2,
+      "sample_index": 9,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_009.npz",
+      "seed": 1628986102,
+      "norm": 0.9945485422021018
+    },
+    {
+      "scale": 2,
+      "sample_index": 10,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_010.npz",
+      "seed": 3510835450,
+      "norm": 0.994107867450198
+    },
+    {
+      "scale": 2,
+      "sample_index": 11,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_02/sample_011.npz",
+      "seed": 2579197601,
+      "norm": 0.9944713022842027
+    },
+    {
+      "scale": 4,
+      "sample_index": 0,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_000.npz",
+      "seed": 3727041346,
+      "norm": 0.9780766781305839
+    },
+    {
+      "scale": 4,
+      "sample_index": 1,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_001.npz",
+      "seed": 83194421,
+      "norm": 0.9779568853729459
+    },
+    {
+      "scale": 4,
+      "sample_index": 2,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_002.npz",
+      "seed": 2460137660,
+      "norm": 0.9777394069021932
+    },
+    {
+      "scale": 4,
+      "sample_index": 3,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_003.npz",
+      "seed": 2204498688,
+      "norm": 0.9776618035696032
+    },
+    {
+      "scale": 4,
+      "sample_index": 4,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_004.npz",
+      "seed": 226471344,
+      "norm": 0.978006858449715
+    },
+    {
+      "scale": 4,
+      "sample_index": 5,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_005.npz",
+      "seed": 4249649219,
+      "norm": 0.9781183764163727
+    },
+    {
+      "scale": 4,
+      "sample_index": 6,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_006.npz",
+      "seed": 1537702220,
+      "norm": 0.9778636266297182
+    },
+    {
+      "scale": 4,
+      "sample_index": 7,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_007.npz",
+      "seed": 1902877481,
+      "norm": 0.9777060727284621
+    },
+    {
+      "scale": 4,
+      "sample_index": 8,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_008.npz",
+      "seed": 1555612567,
+      "norm": 0.9776868589488031
+    },
+    {
+      "scale": 4,
+      "sample_index": 9,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_009.npz",
+      "seed": 3216272225,
+      "norm": 0.9776990602884328
+    },
+    {
+      "scale": 4,
+      "sample_index": 10,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_010.npz",
+      "seed": 72683558,
+      "norm": 0.9780933595855991
+    },
+    {
+      "scale": 4,
+      "sample_index": 11,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_04/sample_011.npz",
+      "seed": 48955750,
+      "norm": 0.9780528444422493
+    },
+    {
+      "scale": 8,
+      "sample_index": 0,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_000.npz",
+      "seed": 3645578356,
+      "norm": 0.9273054493512934
+    },
+    {
+      "scale": 8,
+      "sample_index": 1,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_001.npz",
+      "seed": 2315451197,
+      "norm": 0.9275229952590723
+    },
+    {
+      "scale": 8,
+      "sample_index": 2,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_002.npz",
+      "seed": 65871573,
+      "norm": 0.9275200390474618
+    },
+    {
+      "scale": 8,
+      "sample_index": 3,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_003.npz",
+      "seed": 3826472632,
+      "norm": 0.9272730152548251
+    },
+    {
+      "scale": 8,
+      "sample_index": 4,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_004.npz",
+      "seed": 2419683705,
+      "norm": 0.9274298428655938
+    },
+    {
+      "scale": 8,
+      "sample_index": 5,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_005.npz",
+      "seed": 2759044005,
+      "norm": 0.927333085669816
+    },
+    {
+      "scale": 8,
+      "sample_index": 6,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_006.npz",
+      "seed": 3633616594,
+      "norm": 0.9272650269096602
+    },
+    {
+      "scale": 8,
+      "sample_index": 7,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_007.npz",
+      "seed": 2195103410,
+      "norm": 0.9274270060879405
+    },
+    {
+      "scale": 8,
+      "sample_index": 8,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_008.npz",
+      "seed": 681399603,
+      "norm": 0.9274361509812268
+    },
+    {
+      "scale": 8,
+      "sample_index": 9,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_009.npz",
+      "seed": 2632148352,
+      "norm": 0.9274051762745955
+    },
+    {
+      "scale": 8,
+      "sample_index": 10,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_010.npz",
+      "seed": 1699727877,
+      "norm": 0.9273117554723704
+    },
+    {
+      "scale": 8,
+      "sample_index": 11,
+      "path": "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/data/phase3_bandc/te2rg_multiscale/scale_08/sample_011.npz",
+      "seed": 721355454,
+      "norm": 0.9273948630659559
+    }
+  ]
+}

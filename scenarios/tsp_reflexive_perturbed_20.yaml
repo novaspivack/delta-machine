@@ -1,0 +1,100 @@
+name: "Reflexive TSP Transport (20-city perturbed)"
+description: "Non-circular 20-city layout with coordinate perturbations to stress-test DSAC subtour suppression."
+scenario_type: tsp_reflexive
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 15000
+initial_condition_refs:
+  - name: tsp_uniform_warm_start
+    type: tsp_warm_start
+    parameters:
+      num_cities: 20
+      embedding_row_start: 2
+      embedding_col_start: 2
+      noise_level: 0.08
+
+constraints:
+  - name: psi_imag_sync
+    expression: chi - psi_imag
+    variables: [psi_imag]
+    target: psi_imag
+    dependencies: [chi]
+    weight: 0.05
+
+  - name: chi_decay
+    expression: chi * 0.02
+    variables: [chi]
+    target: chi
+    dependencies: []
+    weight: 0.08
+
+  - name: chi_dot_decay
+    expression: 0.0
+    variables: [chi_dot]
+    target: chi_dot
+    dependencies: []
+    weight: 0.08
+
+halting_criteria:
+  success_condition: tour_verified
+  max_steps: 15000
+  dissonance_plateau_steps: 400
+  dissonance_plateau_tolerance: 0.0015
+
+success_metrics:
+  tour_verified:
+    min: 1.0
+  doubly_stochastic_error:
+    max: 0.02
+  tour_cost_gap:
+    max: 0.05
+
+metadata:
+  notes_ref: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/notes/1.5_dsac_scenario_roadmap.md"
+  description: "Perturbed 20-city layout for crossover studies versus OR-Tools."
+  max_workers: 9
+  lattice_usage_margin: 4
+  meta_control:
+    reaction_decay: 0.93
+    temperature_gain: 0.05
+    drive_gain: 0.35
+    beta_gain: 6.5
+    sinkhorn_extra_max: 10
+    perturbation_threshold: 6.0e-4
+    perturbation_cooldown: 140
+    perturbation_strength: 0.03
+    temperature_leak: 0.02
+  tsp:
+    num_cities: 20
+    row_start: 2
+    col_start: 2
+    beta: 7.5
+    epsilon: 1.0e-6
+    sinkhorn_iterations: 18
+    stochasticity_tolerance: 0.02
+    assignment_threshold: 0.45
+    cost_gap_target: 0.05
+    city_positions:
+      - [0.86230169753, 0.465478207172]
+      - [0.816596238368, 0.58381522662]
+      - [0.794338242837, 0.73016770005]
+      - [0.753980030437, 0.794931792135]
+      - [0.635835822124, 0.814076612992]
+      - [0.499655265393, 0.821863612865]
+      - [0.423971369607, 0.792948540052]
+      - [0.282819796505, 0.793341649449]
+      - [0.236123111199, 0.684611390649]
+      - [0.151064838114, 0.652845859749]
+      - [0.119716862702, 0.484922292503]
+      - [0.175970513932, 0.418897427357]
+      - [0.172425447523, 0.277985888832]
+      - [0.29864483293, 0.265251485177]
+      - [0.388721977869, 0.131693971294]
+      - [0.517486213662, 0.119688957269]
+      - [0.640562366063, 0.175513771641]
+      - [0.701419305121, 0.228752495118]
+      - [0.815053258706, 0.282319396811]
+      - [0.869072265687, 0.386362574212]
+    optimal_tour: [0, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    optimal_cost: 2.3926539332040915
+  expected_behavior: "DSAC maintains a single Hamiltonian cycle on non-circular layouts, matching OR-Tools cost within 5% while providing plateau diagnostics."

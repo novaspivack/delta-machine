@@ -1,0 +1,74 @@
+name: "Phase I PR-0 Flux Rediscovery"
+description: "Recover the linear diffusion law (damping flux + κ · density_delta = 0) from PR-0 Rule-110 observer data."
+scenario_type: discovery
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 6000
+
+halting_criteria:
+  dissonance_plateau_steps: 200
+  dissonance_plateau_tolerance: 0.0004
+  max_steps: 6000
+  success_condition: discovery_verified
+
+success_metrics:
+  residual_rms:
+    max: 1.0e-12
+  max_coefficient_error:
+    max: 5.0e-12
+  discovery_verified:
+    min: 1.0
+
+initial_condition_refs:
+  - name: pr0_diffusion_dataset
+    type: pr0_diffusion_dataset
+    parameters:
+      csv_path: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/si_optimizer_data/MATHEMATICAL_FOUNDATIONS_REFLEXIVE_REALITY/TE_1_VALIDATION_PROGRAM/TE_1.U_TRANSPUTATIONAL_UNIVERSALITY/results/wtu/rule110/pr0_output.csv"
+      diffusivity: 50.0
+
+constraints:
+  - name: chi_identity
+    expression: chi
+    variables: [chi]
+    target: chi
+    dependencies: []
+    weight: 0.0
+
+metadata:
+  description: "Phase I PR-0 calibration: demonstrate DSAC learns the reflexive diffusion closure damping_flux + κ · density_delta = 0 with κ = 50."
+  notes_ref: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/notes/1.20_scientific_discovery_validation_plan.md"
+  max_workers: 9
+  constraint_backend:
+    type: taichi
+    arch: cpu
+    cpu_max_num_threads: auto
+    fusion_policy: per-node
+    parallelize: auto
+    inner_iterations: 1
+    tile_shape: auto
+    use_vectorized: true
+  freeze_fields: true
+  diffusivity: 50.0
+  dataset_path: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/si_optimizer_data/MATHEMATICAL_FOUNDATIONS_REFLEXIVE_REALITY/TE_1_VALIDATION_PROGRAM/TE_1.U_TRANSPUTATIONAL_UNIVERSALITY/results/wtu/rule110/pr0_output.csv"
+  discovery_features:
+    - name: density_delta
+      expression: psi_real
+    - name: damping_flux
+      expression: psi_imag
+    - name: gamma_mean
+      expression: chi_dot
+    - name: bias
+      expression: 1.0
+  discovery_truth:
+    density_delta: 50.0
+    damping_flux: 1.0
+    gamma_mean: 0.0
+    bias: 0.0
+  discovery_truth_expression: chi
+  discovery_target_expression: chi
+  discovery_include_bias: false
+  coefficient_tolerance: 1.0e-12
+  max_coefficient_tolerance: 5.0e-12
+  residual_tolerance: 1.0e-12
+  verification_window: 40
+  expected_behavior: "DSAC settles on coefficients {damping_flux=1, density_delta=50} reproducing the PR-0 flux law exactly."

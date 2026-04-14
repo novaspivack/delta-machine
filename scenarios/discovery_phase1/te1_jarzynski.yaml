@@ -1,0 +1,91 @@
+name: "Phase I TE₁ Jarzynski Rediscovery"
+description: "Validate Jarzynski equality (⟨e^{-ΔS}⟩ = 1) using TE₁.B Reflexive Statistical Mechanics ensembles."
+scenario_type: discovery
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 6000
+
+halting_criteria:
+  dissonance_plateau_steps: 200
+  dissonance_plateau_tolerance: 0.0004
+  max_steps: 6000
+  success_condition: discovery_verified
+
+success_metrics:
+  residual_rms:
+    max: 1.0e-12
+  max_coefficient_error:
+    max: 5.0e-12
+  discovery_verified:
+    min: 1.0
+
+initial_condition_refs:
+  - name: te1_jarzynski_dataset
+    type: te1_jarzynski_dataset
+    parameters:
+      data_path: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/si_optimizer_data/MATHEMATICAL_FOUNDATIONS_REFLEXIVE_REALITY/TE_1_VALIDATION_PROGRAM/TE_1.B_RSM/results/run_20251113_183804/results/jarzynski.json"
+
+constraints:
+  - name: chi_dot_relax
+    expression: chi_dot
+    variables: [chi_dot]
+    target: chi_dot
+    dependencies: []
+    weight: 0.0
+
+metadata:
+  description: "Phase I TE₁ calibration: confirm DSAC rediscovers Jarzynski equality from TE₁.B ensemble outputs (log ⟨e^{-ΔS}⟩ ≈ 0)."
+  notes_ref: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/notes/1.20_scientific_discovery_validation_plan.md"
+  max_workers: 9
+  freeze_fields: true
+  constraint_backend:
+    type: taichi
+    arch: cpu
+    cpu_max_num_threads: auto
+    fusion_policy: auto
+    parallelize: auto
+    inner_iterations: 2
+    tile_shape: auto
+    use_vectorized: true
+  te1_dataset_path: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/si_optimizer_data/MATHEMATICAL_FOUNDATIONS_REFLEXIVE_REALITY/TE_1_VALIDATION_PROGRAM/TE_1.B_RSM/results/run_20251113_183804/results/jarzynski.json"
+  te1_reference_run: "TE_1.B_RSM results/run_20251113_183804"
+  discovery_features:
+    - name: temperature
+      expression: psi_real
+    - name: temperature_sq
+      expression: psi_real**2
+    - name: sigma
+      expression: psi_imag
+    - name: sigma_sq
+      expression: psi_imag**2
+    - name: mu
+      expression: chi_dot
+    - name: mu_sq
+      expression: chi_dot**2
+    - name: temp_sigma
+      expression: psi_real * psi_imag
+    - name: temp_mu
+      expression: psi_real * chi_dot
+    - name: sigma_mu
+      expression: psi_imag * chi_dot
+    - name: bias
+      expression: 1.0
+  discovery_truth:
+    temperature: 0.0
+    temperature_sq: 0.0
+    sigma: 0.0
+    sigma_sq: 0.0
+    mu: 0.0
+    mu_sq: 0.0
+    temp_sigma: 0.0
+    temp_mu: 0.0
+    sigma_mu: 0.0
+    bias: 0.0
+  discovery_truth_expression: chi
+  discovery_target_expression: chi
+  discovery_include_bias: false
+  coefficient_tolerance: 1.0e-12
+  max_coefficient_tolerance: 5.0e-12
+  residual_tolerance: 1.0e-12
+  verification_window: 40
+  expected_behavior: "DSAC treats the TE₁ jarzynski.json dataset as a frozen lattice and demonstrates ⟨e^{-ΔS}⟩−1≈0 across temperature/mu/σ grid, matching TE₁.B baselines."

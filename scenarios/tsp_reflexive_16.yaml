@@ -1,0 +1,96 @@
+name: "Reflexive TSP Transport (16-city prototype)"
+description: "Hamiltonian tour synthesis for a 16-city circular lattice embedding."
+scenario_type: tsp_reflexive
+lattice: [64, 64]
+timestep: 0.02
+max_steps: 11000
+initial_condition_refs:
+  - name: tsp_uniform_warm_start
+    type: tsp_warm_start
+    parameters:
+      num_cities: 16
+      embedding_row_start: 1
+      embedding_col_start: 1
+      noise_level: 0.05
+
+constraints:
+  - name: psi_imag_sync
+    expression: chi - psi_imag
+    variables: [psi_imag]
+    target: psi_imag
+    dependencies: [chi]
+    weight: 0.05
+
+  - name: chi_decay
+    expression: chi * 0.02
+    variables: [chi]
+    target: chi
+    dependencies: []
+    weight: 0.08
+
+  - name: chi_dot_decay
+    expression: 0.0
+    variables: [chi_dot]
+    target: chi_dot
+    dependencies: []
+    weight: 0.08
+
+halting_criteria:
+  success_condition: tour_verified
+  max_steps: 11000
+  dissonance_plateau_steps: 320
+  dissonance_plateau_tolerance: 0.0015
+
+success_metrics:
+  tour_verified:
+    min: 1.0
+  doubly_stochastic_error:
+    max: 0.02
+  tour_cost_gap:
+    max: 0.05
+
+metadata:
+  notes_ref: "/Users/nova/My Drive (nova@novaspivack.com)/Works in Progress/Python/Particle Derivations/Optimizer new tests/Delta_machine/notes/1.5_dsac_scenario_roadmap.md"
+  description: "16-city Sinkhorn + reflexive subtour suppression scaling study."
+  max_workers: 9
+  lattice_usage_margin: 4
+  meta_control:
+    reaction_decay: 0.93
+    temperature_gain: 0.05
+    drive_gain: 0.35
+    beta_gain: 6.5
+    sinkhorn_extra_max: 10
+    perturbation_threshold: 6.0e-4
+    perturbation_cooldown: 140
+    perturbation_strength: 0.03
+    temperature_leak: 0.02
+  tsp:
+    num_cities: 16
+    row_start: 1
+    col_start: 1
+    beta: 7.5
+    epsilon: 1.0e-6
+    sinkhorn_iterations: 16
+    stochasticity_tolerance: 0.02
+    assignment_threshold: 0.45
+    cost_gap_target: 0.05
+    city_positions:
+      - [0.85, 0.5]
+      - [0.823357836379, 0.633939201328]
+      - [0.747487373415, 0.747487373415]
+      - [0.633939201328, 0.823357836379]
+      - [0.5, 0.85]
+      - [0.366060798672, 0.823357836379]
+      - [0.252512626585, 0.747487373415]
+      - [0.176642163621, 0.633939201328]
+      - [0.15, 0.5]
+      - [0.176642163621, 0.366060798672]
+      - [0.252512626585, 0.252512626585]
+      - [0.366060798672, 0.176642163621]
+      - [0.5, 0.15]
+      - [0.633939201328, 0.176642163621]
+      - [0.747487373415, 0.252512626585]
+      - [0.823357836379, 0.366060798672]
+    optimal_tour: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    optimal_cost: 2.1850116065803973
+  expected_behavior: "Reflexive Sinkhorn dynamics sustain a single Hamiltonian cycle across 16 cities, converging within the defined plateau window while matching the brute-force optimum within 5%."
