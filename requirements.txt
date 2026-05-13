@@ -4,6 +4,6 @@ sympy>=1.12
 psutil>=5.9
 PySide6>=6.6
 PyYAML>=6.0
-ortools>=9.7
+ortools>=9.15.6755
 tsplib95>=0.7
 taichi>=1.6
