@@ -1,6 +1,6 @@
 # Δ-Machine runtime dependencies (see notes 1.0, 1.2, 1.4)
 numpy>=1.23
-sympy>=1.12
+sympy>=1.14.0
 psutil>=5.9
 PySide6>=6.6
 PyYAML>=6.0
